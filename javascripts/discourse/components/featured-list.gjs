@@ -4,10 +4,10 @@ import { on } from '@ember/modifier';
 import { action } from '@ember/object';
 import { service } from '@ember/service';
 import BasicTopicList from 'discourse/components/basic-topic-list';
-import ConditionalLoadingSpinner from 'discourse/components/conditional-loading-spinner';
-import DButton from 'discourse/components/d-button';
+import DConditionalLoadingSpinner from 'discourse/ui-kit/d-conditional-loading-spinner';
+import DButton from 'discourse/ui-kit/d-button';
 import Category from 'discourse/models/category';
-import i18n from 'discourse-common/helpers/i18n';
+import { i18n } from 'discourse-i18n';
 
 export default class FeaturedList extends Component {
   @service store;
@@ -29,13 +29,13 @@ export default class FeaturedList extends Component {
             {{on 'click' (if this.currentUser this.createTopic this.showLogin)}}
           >{{i18n (themePrefix 'post_button')}}</DButton>
         </div>
-        <ConditionalLoadingSpinner @condition={{this.isLoading}}>
+        <DConditionalLoadingSpinner @condition={{this.isLoading}}>
           <BasicTopicList
             @topics={{this.filteredTopics}}
             @showPosters='true'
             class='featured-lists__list-body'
           />
-        </ConditionalLoadingSpinner>
+        </DConditionalLoadingSpinner>
       </div>
     {{/if}}
   </template>
